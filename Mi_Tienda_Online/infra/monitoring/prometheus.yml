@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s  # Intervalo de recolección de métricas
+
+scrape_configs:
+  - job_name: 'node_app'
+    static_configs:
+      - targets: ['app:4000']
+
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:80']
+
+  - job_name: 'mongodb'
+    static_configs:
+      - targets: ['mongodb:27017']

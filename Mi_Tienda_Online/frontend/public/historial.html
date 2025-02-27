@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Compras</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/historial.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">📜 Historial de Compras</h2>
+        <ul class="list-group" id="historial-lista"></ul>
+        <p class="text-center mt-3 text-muted" id="historial-vacio" style="display: none;">No hay compras registradas.</p>
+        <button class="btn btn-primary mt-3" onclick="window.location.href='index.html'">Volver a la Tienda</button>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/historial.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("🔒 Debes iniciar sesión para ver el historial de compras.");
+                window.location.href = "login.html";
+                return;
+            }
+            cargarHistorial();
+        });
+    </script>
+</body>
+</html>

@@ -1,16 +1,20 @@
 body {
+    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
 }
 
-h1 {
-    color: #333;
+/* Navbar */
+.navbar {
+    padding: 15px;
 }
 
+/* Productos */
 #productos-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#productos-lista {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -19,22 +23,49 @@ h1 {
 
 .producto {
     background: white;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 250px;
-    text-align: left;
+    text-align: center;
 }
 
-button {
-    background: #28a745;
+.producto h3 {
+    font-size: 1.3rem;
+}
+
+.producto p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.producto button {
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.producto button:hover {
+    background-color: #0056b3;
+}
+
+/* Botón de autenticación */
+#btn-auth {
+    padding: 8px 15px;
+    font-size: 1rem;
     border-radius: 5px;
 }
 
-button:hover {
-    background: #218838;
+/* Centrar contenido del carrito */
+#carrito-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Ajustes generales */
+.container {
+    max-width: 1100px;
 }

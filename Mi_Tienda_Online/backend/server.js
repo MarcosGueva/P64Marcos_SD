@@ -1,9 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const mongoose = require("mongoose"); // 🔹 Importar Mongoose
+require("dotenv").config(); // 🔹 Cargar variables de entorno
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+// 🔹 Conectar a MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+
+    serverSelectionTimeoutMS: 15000 // Aumenta el tiempo de espera
+})
+.then(() => console.log("✅ Conectado a MongoDB"))
+.catch(err => console.error("❌ Error en la conexión a MongoDB:", err));
 
 // Middlewares
 app.use(cors());

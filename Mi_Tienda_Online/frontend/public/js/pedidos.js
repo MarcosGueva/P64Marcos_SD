@@ -3,23 +3,23 @@ document.addEventListener("DOMContentLoaded", obtenerPedidos);
 async function obtenerPedidos() {
     const token = localStorage.getItem("token");
     if (!token) {
-        alert("Debes iniciar sesión para ver tus pedidos.");
+        alert("🔒 Debes iniciar sesión para ver tus pedidos.");
         window.location.href = "login.html";
         return;
     }
 
     try {
-        const respuesta = await fetch("http://localhost:4000/api/pedidos", {
+        const respuesta = await fetch(`${API_URL}/pedidos`, {
             method: "GET",
             headers: { "Authorization": `Bearer ${token}` }
         });
-
         const pedidos = await respuesta.json();
         mostrarPedidos(pedidos);
     } catch (error) {
         console.error("Error al obtener pedidos:", error);
     }
 }
+
 
 function mostrarPedidos(pedidos) {
     const contenedor = document.getElementById("pedidos-lista");

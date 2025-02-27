@@ -45,17 +45,41 @@ function eliminarDelCarrito(index) {
     mostrarCarrito();
 }
 
-function finalizarCompra() {
+async function finalizarCompra() {
     if (carrito.length === 0) {
         alert("El carrito está vacío.");
         return;
     }
     
-    localStorage.removeItem("carrito");
-    carrito = [];
-    mostrarCarrito();
-    alert("✅ Compra realizada con éxito.");
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("🔒 Debes iniciar sesión para pagar.");
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+        const respuesta = await fetch(`${API_URL}/pedidos`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ productos: carrito, total: carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0) })
+        });
+
+        if (!respuesta.ok) throw new Error("Error en la compra");
+        alert("✅ Compra realizada con éxito.");
+        localStorage.removeItem("carrito");
+        carrito = [];
+        mostrarCarrito();
+        window.location.href = "historial.html";
+    } catch (error) {
+        console.error("Error al procesar el pedido:", error);
+        alert("❌ No se pudo procesar el pedido.");
+    }
 }
+
 
 // ✅ Agregar un producto al carrito (permite múltiples unidades)
 window.agregarAlCarrito = function(id, nombre, precio) {
